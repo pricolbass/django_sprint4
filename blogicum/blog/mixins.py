@@ -27,7 +27,7 @@ class PostChangeMixin:
     pk_url_kwarg = 'post_id'
 
     def dispatch(self, request, *args, **kwargs):
-        if self.get_object().author == request.user:
+        if self.get_object().author != request.user:
             return redirect('blog:post_detail', self.kwargs['post_id'])
         return super().dispatch(request, *args, **kwargs)
 
